@@ -245,8 +245,27 @@ function drawMatrix(matrix, offset) {
     });
   });
 }
+document.getElementById('left').addEventListener('touchstart', e => { playerMove(-1); e.preventDefault(); });
+document.getElementById('right').addEventListener('touchstart', e => { playerMove(1); e.preventDefault(); });
+document.getElementById('down').addEventListener('touchstart', e => { playerDrop(); e.preventDefault(); });
+document.getElementById('rotateL').addEventListener('touchstart', e => { playerRotate(-1); e.preventDefault(); });
+document.getElementById('rotateR').addEventListener('touchstart', e => { playerRotate(1); e.preventDefault(); });
+
+// Optional: For desktop clicks too
+const btns = [
+  ['left', () => playerMove(-1)],
+  ['right', () => playerMove(1)],
+  ['down', () => playerDrop()],
+  ['rotateL', () => playerRotate(-1)],
+  ['rotateR', () => playerRotate(1)]
+];
+btns.forEach(([id, fn]) => {
+  document.getElementById(id).addEventListener('click', fn);
+});
+
 
 
 playerReset();
 updateScore();
 update();
+
